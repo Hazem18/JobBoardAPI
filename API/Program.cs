@@ -66,10 +66,18 @@ namespace API
 
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();
-
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReact", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5173")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
             var app = builder.Build();
             app.UseMiddleware<ExceptionHandlingMiddleware>();
-            
+            app.UseCors("AllowReact");
             using (var scope = app.Services.CreateScope())
             {
                 var roleManager = scope.ServiceProvider
