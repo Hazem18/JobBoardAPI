@@ -9,6 +9,6 @@ namespace Domain.Exceptions
             => new($"{typeof(T).Name} with id {id} is Unauthorized");
 
         public static UnauthorizedException ForInvalidCredentials()
-                 => new("Invalid email or password");
+            => new("You are not authorized to perform this action");
     }
 }

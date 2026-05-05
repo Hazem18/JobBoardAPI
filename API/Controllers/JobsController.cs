@@ -78,5 +78,14 @@ namespace API.Controllers
             return NoContent();
 
         }
+
+        [HttpGet("my-jobs")]
+        [Authorize(Roles = "Company")]
+        public async Task<IActionResult> GetMyJobs()
+        {
+            var companyId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var jobs = await _jobListingService.GetByCompanyIdAsync(companyId);
+            return Ok(jobs);
+        }
     }
 }

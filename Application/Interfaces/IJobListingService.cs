@@ -11,5 +11,6 @@ namespace Application.Interfaces
         Task UpdateAsync(int id, UpdateJobListingDto dto, string companyId);
         Task DeleteAsync(int id, string companyId);
         Task CloseAsync(int id, string companyId);
+        Task<List<JobListingResponseDto>> GetByCompanyIdAsync(string companyId);
     }
 }

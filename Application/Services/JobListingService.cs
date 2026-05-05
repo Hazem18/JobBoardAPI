@@ -66,6 +66,15 @@ namespace Application.Services
             return _mapper.Map<JobListingResponseDto>(jobListing);
         }
 
+        public async Task<List<JobListingResponseDto>> GetByCompanyIdAsync(string companyId)
+        {
+            var jobListings = await _jobListingRepository.GetByCompanyIdAsync(companyId);
+            if (jobListings == null || !jobListings.Any())
+                throw NotFoundException.For<JobListing>(companyId);
+
+            return _mapper.Map<List<JobListingResponseDto>>(jobListings);
+        }
+
         public async Task<List<JobListingResponseDto>> GetFilteredAsync(
             string? location, 
             string? jobType, decimal? minSalary,
