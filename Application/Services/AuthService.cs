@@ -37,6 +37,7 @@ namespace Application.Services
 
             return new AuthResponseDto
             {
+                Id = user.Id,
                 Token = token,
                 Email = user.Email,
                 FullName = user.FullName,
@@ -67,6 +68,7 @@ namespace Application.Services
             var token =  _tokenService.GenerateToken(candidate, "Candidate");
             return new AuthResponseDto
             {
+                Id = candidate.Id,
                 Token = token,
                 Email = candidate.Email,
                 FullName = candidate.FullName,
@@ -83,6 +85,7 @@ namespace Application.Services
 
             var company = new Company
             {
+            
                 UserName = dto.Email,
                 Email = dto.Email,
                 CompanyName = dto.CompanyName,
@@ -100,6 +103,7 @@ namespace Application.Services
 
             return new AuthResponseDto
             {
+                Id = company.Id,
                 Token = token,
                 Email = company.Email,
                 FullName = company.FullName,

@@ -14,6 +14,8 @@ namespace Application
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IJobListingService, JobListingService>();
             services.AddScoped<IJobApplicationService, JobApplicationService>();
+            services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<ICandidateService, CandidateService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }
