@@ -6,6 +6,6 @@ namespace Domain.Exceptions
         public DuplicateApplicationException(string message) : base(message) { }
 
         public static DuplicateApplicationException For<T>(int id)
-            => new($"{typeof(T).Name} with id {id} already exists ");
+            => new($"You have already applied for this job");
     }
 }

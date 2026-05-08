@@ -17,6 +17,7 @@ namespace Application
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<ICandidateService, CandidateService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddScoped<IAIService, GeminiService>();
             return services;
         }
     }

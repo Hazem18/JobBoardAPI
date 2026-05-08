@@ -68,11 +68,8 @@ namespace Application.Services
 
         public async Task<List<JobListingResponseDto>> GetByCompanyIdAsync(string companyId)
         {
-            var jobListings = await _jobListingRepository.GetByCompanyIdAsync(companyId);
-            if (jobListings == null || !jobListings.Any())
-                throw NotFoundException.For<JobListing>(companyId);
-
-            return _mapper.Map<List<JobListingResponseDto>>(jobListings);
+            var jobs = await _jobListingRepository.GetByCompanyIdAsync(companyId);
+            return _mapper.Map<List<JobListingResponseDto>>(jobs ?? new List<JobListing>());
         }
 
         public async Task<List<JobListingResponseDto>> GetFilteredAsync(
