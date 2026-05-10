@@ -204,26 +204,6 @@ Stateless authentication scales horizontally without shared session storage. Tok
 - Deleting a listing cascades to delete all its applications
 
 ---
-
-## Screenshots
-
-### Landing Page
-Clean hero section with job search and feature highlights.
-
-### Browse Jobs
-Filterable job cards with location, salary, type, and keyword search.
-
-### Company Dashboard
-Post jobs, view applicants, see AI match scores, update application status.
-
-### Candidate Dashboard
-Track all applications with real-time status updates.
-
-### AI Cover Letter
-One-click AI-generated cover letter based on job description and candidate profile.
-
----
-
 ## Project Structure
 
 ```
