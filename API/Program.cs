@@ -67,12 +67,11 @@ namespace API
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();
 
-            // --- UPDATED CORS POLICY ---
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowReact", policy =>
                 {
-                    policy.AllowAnyOrigin() // Allowing any origin for now to ensure it works on Vercel
+                    policy.AllowAnyOrigin() 
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                 });
@@ -82,13 +81,13 @@ namespace API
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-            // --- CORS MUST BE BEFORE OTHER MIDDLEWARE ---
+            
             app.UseCors("AllowReact");
 
             app.UseSwagger();
             app.UseSwaggerUI();
 
-            // COMMENT THIS OUT for Somee deployment to avoid Mixed Content loops
+            
             // app.UseHttpsRedirection(); 
 
             app.UseAuthentication();
