@@ -79,7 +79,7 @@ namespace API
 
             var app = builder.Build();
 
-            //app.UseMiddleware<ExceptionHandlingMiddleware>();
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             
             app.UseCors("AllowReact");
