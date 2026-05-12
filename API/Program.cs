@@ -79,7 +79,7 @@ namespace API
 
             var app = builder.Build();
 
-            app.UseMiddleware<ExceptionHandlingMiddleware>();
+            //app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             
             app.UseCors("AllowReact");
@@ -88,7 +88,7 @@ namespace API
             app.UseSwaggerUI();
 
             
-            // app.UseHttpsRedirection(); 
+            app.UseHttpsRedirection(); 
 
             app.UseAuthentication();
             app.UseAuthorization();
