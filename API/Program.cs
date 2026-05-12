@@ -66,52 +66,31 @@ namespace API
 
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();
+
+            // --- UPDATED CORS POLICY ---
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowReact", policy =>
                 {
-                    policy.WithOrigins("http://localhost:5173")
+                    policy.AllowAnyOrigin() // Allowing any origin for now to ensure it works on Vercel
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                 });
             });
+
             var app = builder.Build();
+
             app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+            // --- CORS MUST BE BEFORE OTHER MIDDLEWARE ---
             app.UseCors("AllowReact");
-            using (var scope = app.Services.CreateScope())
-            {
-                var roleManager = scope.ServiceProvider
-                    .GetRequiredService<RoleManager<IdentityRole>>();
 
-                foreach (var role in new[] { "Admin", "Company", "Candidate" })
-                {
-                    if (!await roleManager.RoleExistsAsync(role))
-                        await roleManager.CreateAsync(new IdentityRole(role));
-                }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
-                var userManager = scope.ServiceProvider
-                    .GetRequiredService<UserManager<ApplicationUser>>();
+            // COMMENT THIS OUT for Somee deployment to avoid Mixed Content loops
+            // app.UseHttpsRedirection(); 
 
-                if (await userManager.FindByEmailAsync("admin@jobboard.com") == null)
-                {
-                    var admin = new ApplicationUser
-                    {
-                        UserName = "admin@jobboard.com",
-                        Email = "admin@jobboard.com",
-                        FullName = "Admin"
-                    };
-                    await userManager.CreateAsync(admin, "Admin@123");
-                    await userManager.AddToRoleAsync(admin, "Admin");
-                }
-            }
-
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-
-            app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
