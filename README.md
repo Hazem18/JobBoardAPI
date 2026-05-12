@@ -1,7 +1,8 @@
 # HireWave — Job Board API & Web App
 
 A full-stack job board platform connecting companies with candidates. Built with ASP.NET Core 9, Clean Architecture, React, and AI-powered features.
-
+🔗 **Live Demo:** [hirewave-client.vercel.app](https://hire-wave-client-zwag.vercel.app/)
+🔗 **Backend API:** [hirewave.Railway.com](https://jobboardapi-production.up.railway.app/swagger/index.html)
 ## Live Features
 
 - 🏢 **Companies** — register, post job listings, review applicants, update application status
